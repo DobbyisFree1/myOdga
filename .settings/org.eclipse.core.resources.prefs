@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-encoding//src/main/java/odga/bt/controller/MemberController.java=UTF-8
-encoding//src/main/java/odga/bt/controller/PlannerController.java=UTF-8
-encoding//src/main/java/odga/bt/controller/ReviewController.java=UTF-8
-encoding//src/main/java/odga/bt/mapper/MemberMapper.java=UTF-8
-encoding//src/main/java/odga/bt/service/MemberServiceImpl.java=UTF-8
-encoding//src/main/java/odga/bt/service/PlannerServiceImpl.java=UTF-8
-encoding//src/main/java/odga/bt/service/ReviewServiceImpl.java=UTF-8
-encoding//src/test/java/yum/md/persistence/tranTest.java=UTF-8
