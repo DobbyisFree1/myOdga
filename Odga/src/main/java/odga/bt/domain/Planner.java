@@ -16,7 +16,7 @@ public class Planner {
 	private String  p_title;
 	private String p_msize;
 	private String p_concept;
-	
-	//·£´ý ÀÌ¹ÌÁö ³×ÀÓ
+	 
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private String randomImg;
 }

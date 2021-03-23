@@ -45,23 +45,18 @@ public class PlannerController {
 	}
 	@GetMapping("planner")
 	public ModelAndView planner(@RequestParam long m_id) {
-		//System.out.println(m_id);
 		TotalList lists = service.listS(m_id);
 		System.out.println(lists.getThisP_id());
-		ModelAndView mv = new ModelAndView("planner", "list", lists);
+		ModelAndView mv = new ModelAndView("plan/planner", "list", lists);
 		return mv;
 	}
 	
 	@GetMapping("search")
 	public @ResponseBody SearchResult search(@RequestParam String searchOption, @RequestParam String keyword, @RequestParam String areacode, @RequestParam String sigungucode,
 			HttpServletResponse response, HttpSession session) {
-		System.out.println("#占심쇽옙 "+searchOption+"#키占쏙옙占쏙옙 "+keyword+"#占심쇽옙 "+areacode+"#키占쏙옙占쏙옙 "+sigungucode);
 		
 	  Searchcode sc = new Searchcode(searchOption, keyword, areacode, sigungucode);
-	  SearchResult result = service.searchedList(sc); //int count =
-	  
-
-	  //for(Touritems li:list) System.out.println(li.getCat1());
+	  SearchResult result = service.searchedList(sc); 
 	  
 	  return result;
 	}
@@ -75,7 +70,7 @@ public class PlannerController {
 		System.out.println("###P_ID: "+p_id);
 		System.out.println("sp_day "+sp_dayStr);
 		long sp_day = -1;
-		//System.out.println("# "+sp_sday+"# "+sp_eday);
+
 		if(sp_dayStr != null) {
 			sp_dayStr = sp_dayStr.trim();
 			try {
@@ -95,7 +90,7 @@ public class PlannerController {
 		
 		long thisP_id = p_id; 
 		List<Touritems> list = service.selectDayById(thisP_id, sp_day);
-		System.out.println("정상실행??");
+		System.out.println("정상실행");
 		return list;
 	}
 	
@@ -126,7 +121,6 @@ public class PlannerController {
 	
 	@PostMapping("select")
 	public @ResponseBody List<Touritems> select(String name, String areacode, String sigungucode, String contenttypeid, HttpServletResponse response) {
-		//System.out.println("### name: "+name+" #areacode : "+areacode+" #sigungucode : "+sigungucode+" #contenttypeid : "+contenttypeid);
 		System.out.println(areacode.length());
 		Searchcode sc = new Searchcode(name, areacode, sigungucode, contenttypeid);
 		List<Touritems> list = service.selectResultS(sc); 
@@ -163,7 +157,7 @@ public class PlannerController {
 	   public @ResponseBody Touritems getItem(String contentid) {
 	      System.out.println("##################"+contentid);
 	      Touritems item = service.getItemS(contentid);
-	      System.out.println("####123123"+item.getContentid());
+	      System.out.println("@"+item.getContentid());
 	      return item;
 	   }
 }

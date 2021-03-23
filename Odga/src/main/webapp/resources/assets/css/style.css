@@ -4664,7 +4664,7 @@ form.search-box2 .search-form button {
 }
 
 .footer-area .footer-bottom .footer-copy-right p a {
-   color: #8ba4b1;
+    color: #8ba4b1;
 }
 
 .hero-caption span {
@@ -7487,5 +7487,8 @@ del {
 	margin-top: 10px;
 }
 .header-bottom.header-sticky.sticky-bar .main-menu ul>li>a {
-	margin-top:0 !important;
+	margin-top:0;
+}
+.header-bottom.header-sticky.sticky-bar .main-menu ul li.img-wrapper {
+	margin-top:-6%;
 }

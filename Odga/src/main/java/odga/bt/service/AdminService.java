@@ -21,13 +21,14 @@ public interface AdminService {
 	
 	Touritems bestTouritem();	
 	
-	// È¸¿ø¸®½ºÆ®
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	List<Member> m_listS();
 	
-	//¹®ÀÇ°Ô½ÃÆÇ(°ü¸®ÀÚ)
+	//ï¿½ï¿½ï¿½Ç°Ô½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	List<Support> notificationsS();
-	//¹®ÀÇ°Ô½ÃÆÇ»ó¼¼ÆäÀÌÁö(°ü¸®ÀÚ)
+	//ï¿½ï¿½ï¿½Ç°Ô½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	Support selectByTitle(long s_id);
 	void insertreS(Support support);
 	void deleteS(long s_id);
+	void delmemS(Member mem);
 }

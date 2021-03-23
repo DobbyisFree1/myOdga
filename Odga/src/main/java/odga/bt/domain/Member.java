@@ -22,6 +22,13 @@ public class Member {
 	private int m_verify;
 	private String m_about;
 	private int count;
-	//ÀÌ¸ŞÀÏ ÀÎÁõÅ°
+	//ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°
 	private String Authkey;
+	
+	public Member(String m_email, String m_pwd) {
+		super();
+		this.m_email = m_email;
+		this.m_pwd = m_pwd;
+	}
+	
 }

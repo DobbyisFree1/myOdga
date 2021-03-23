@@ -89,7 +89,7 @@
                                     </li>
                               </ul>
                               <ul style="float: left;width: 20%;padding-top: 23px;" align="left">   
-                                 <li class="login" style="width: 75%;padding: 1%;text-align: center;float:left;">                          
+                                 <li class="login img-wrapper" style="width: 75%;padding: 1%;text-align: center;float:left;">                          
                                              <c:choose>
                                                    <c:when test="${empty LOGINUSER}">
                                                       <a href="login.do" style="padding: inherit;font-size: 80%;">
@@ -116,7 +116,7 @@
                                              </c:choose>
                                           </li>
                                           <c:if test="${not empty LOGINUSER}">
-	 										<li style="float: right;width: 25%;">   
+	 										<li class="img-wrapper" style="float: right;width: 25%;">   
 	                                      	 <div class="main-menu f-right d-none d-lg-block"><img class="img-fluid" onclick="goMypage()" src="assets/img/profile/${LOGINUSER.m_fname}" alt="" style="cursor: pointer;min-height:60px;width: 60px;border-radius: 50%;max-width: 100%;border: 3px solid white;">
 			                                    </div>
 			                           		</li> 

@@ -20,6 +20,11 @@ public class ListController {
     @RequestMapping("/listing")
     public ModelAndView listing(HttpServletRequest request) {
         HttpSession session = request.getSession();
+        
+        if(session.getAttribute("cp") != null) {
+           session.removeAttribute("cp");
+        }
+        
         String keyword = request.getParameter("keyword");
         String catgo = request.getParameter("catgo");
         String cpStr = request.getParameter("cp");
@@ -78,27 +83,27 @@ public class ListController {
         if (catgo != null && keyword != null) {
             int rangeSize = 5;
             listResult = service.getTouritemsListResult(catgo, keyword, cp, ps, rangeSize);
-            mv = new ModelAndView("listing", "listResult", listResult);
+            mv = new ModelAndView("listing/listing", "listResult", listResult);
             if (listResult.getList().size() == 0) {
                 if (cp > 1) 
                     return new ModelAndView("redirect:listing.do?cp=" + (
                         cp - 1
                     ));
                 else 
-                    return new ModelAndView("listing", "listResult", null);
+                    return new ModelAndView("listing/listing", "listResult", null);
                 }
             return mv;
         } else {
             int rangeSize = 5;
             listResult = service.getTouritemsListResult(cp, ps, rangeSize);
-            mv = new ModelAndView("listing", "listResult", listResult);
+            mv = new ModelAndView("listing/listing", "listResult", listResult);
             if (listResult.getList().size() == 0) {
                 if (cp > 1) 
                     return new ModelAndView("redirect:listing.do?cp=" + (
                         cp - 1
                     ));
                 else 
-                    return new ModelAndView("listing", "listResult", null);
+                    return new ModelAndView("listing/listing", "listResult", null);
                 }
             }
         return mv;
@@ -113,7 +118,7 @@ public class ListController {
         ListVo vo = new ListVo();
         vo.setTouritems(touritems);
         vo.setListResult(listResult);
-        ModelAndView mv = new ModelAndView("listing_details", "ListVo", vo);
+        ModelAndView mv = new ModelAndView("listing/listing_details", "ListVo", vo);
         return mv;
     }
 

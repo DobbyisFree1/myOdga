@@ -38,27 +38,25 @@ public class MypageController {
     @Resource
     private TouritemsService tservice;
     
-  //나의 좋아요
 	@GetMapping("myLike.do")
 	public ModelAndView tables(long m_id) {	
-		//m_id 받아주기
+
 		List<Review> mylike = service.listMyLike(m_id);
-		ModelAndView mv = new ModelAndView("myLike","mylike",mylike);
+		ModelAndView mv = new ModelAndView("mypage/myLike","mylike",mylike);
 		return mv; 
 	}
 	@RequestMapping("/member.do")
 	   public String member() {		   
-	      return "member"; 
+	      return "mypage/member"; 
 	   }
 	   @RequestMapping("/leaveM")
 	   public String leave() {
-	      return "leave"; 
+	      return "mypage/leave"; 
 	   }
 	   @RequestMapping("/member_edit.do")
 	   public String member_edit() {
-	      return "member_edit"; 
+	      return "mypage/member_edit"; 
 	   }
-	   //나의 일정
 	   @RequestMapping("/member_plan.do")
 	   public ModelAndView member_plan(long m_id) {
 		   System.out.println("###"+m_id);
@@ -70,41 +68,35 @@ public class MypageController {
 			   String li = ranNum+".jpg";
 			   plan.setRandomImg(li);
 		   }
-		   if(myPlans!=null) return new ModelAndView("myPlan", "myPlans", myPlans);
+		   if(myPlans!=null) return new ModelAndView("mypage/myPlan", "myPlans", myPlans);
 		   else {
-			   System.out.println("myPlans이 들어있나?");
-			   return new ModelAndView("myPlan"); 
+			   return new ModelAndView("mypage/myPlan"); 
 		   }
 	   }
-	   //일정 디테일
 	   @RequestMapping("/plan_detail.do")
 	   public ModelAndView plan_detail(long m_id, long p_id) {
 		   System.out.println(p_id);	   
 		   DetailVo planDetail = service.planDetails(m_id, p_id);
 		   if(planDetail!=null) {
 			   System.out.println(1);
-			   return new ModelAndView("plan_detail", "planDetail", planDetail);
+			   return new ModelAndView("mypage/plan_detail", "planDetail", planDetail);
 		   }else{
 			   System.out.println(2);
-			   return new ModelAndView("plan_detail"); 
+			   return new ModelAndView("mypage/plan_detail"); 
 		   }	       
 	   }
-	   //마이페이지 일정 삭제
 	   @RequestMapping("delPlan")
 	   public String delPlan(long p_id, long m_id) {
-		   //System.out.println("pid : "+p_id+" m_id : "+m_id);
 		   serviceP.delPlan(p_id);
 		   
-		   String view = "forward:/member_plan.do";
+		   String view = "forward:member_plan.do";
 		   return view;
 	   }
-	 //마이페이지 일정 수정
 	   @GetMapping("updateplan")
 	   public ModelAndView updateplan(long p_id, long m_id) {
-	      //System.out.println(m_id);
 	      TotalList lists = service.listS(m_id, p_id);
 	      System.out.println(lists.getThisP_id());
-	      ModelAndView mv = new ModelAndView("planner", "list", lists);
+	      ModelAndView mv = new ModelAndView("plan/planner", "list", lists);
 	      return mv;
 	   }
 	   @RequestMapping("/member_review.do")
@@ -160,7 +152,7 @@ public class MypageController {
 				List<Review> review = service.selectByReviewS(m_id);
 				ListResult listResult = tservice.getTouritemsListResult(cp, ps, rangeSize);
 				ModelAndView mv = new ModelAndView();
-				mv.setViewName("member_review");
+				mv.setViewName("mypage/member_review");
 			    mv.addObject("review", review);
 				mv.addObject("listResult", listResult);
 				System.out.println("#review: " + review);
@@ -180,7 +172,7 @@ public class MypageController {
 		
 		@GetMapping("/update.do")
 		public ModelAndView review_update(long b_id) {
-			return new ModelAndView("review/update", "review", rservice.getReviewS(b_id));
+			return new ModelAndView("community/update", "review", rservice.getReviewS(b_id));
 		}  
 		
 		@PostMapping("/update.do")
@@ -193,13 +185,13 @@ public class MypageController {
 				service.updateWithoutImgS(review);
 			}
 			
-			return new ModelAndView("redirect:/member_review.do?m_id="+ review.getM_id(), "review", service.selectByReviewS(m_id));
+			return new ModelAndView("redirect:member_review.do?m_id="+ review.getM_id(), "review", service.selectByReviewS(m_id));
 		}
 		@GetMapping("/support_mlist.do") 
 	 	public ModelAndView m_notifications(@RequestParam long m_id) {
 		    System.out.println("#m_id: " + m_id);
 			List<Support> notifications = service.m_notificationsS(m_id);
-			ModelAndView mv = new ModelAndView("support_mlist", "notifications", notifications);
+			ModelAndView mv = new ModelAndView("mypage/support_mlist", "notifications", notifications);
 			return mv;
 		}
 }

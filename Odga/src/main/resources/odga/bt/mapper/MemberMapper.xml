@@ -40,7 +40,7 @@
 	
 	<!-- FIND ID/PWD  -->
 	<select id="findId" parameterType="Member" resultType="String">
-		select M_EMAIL from member where m_nick=#{m_nick} and m_phone=#{m_phone}
+		select M_EMAIL from member where m_name=#{m_name} and m_phone=#{m_phone}
 	</select>
 	<select id="findPwd" parameterType="Member">
 		update MEMBER set M_PWD=#{m_pwd} where M_EMAIL=#{m_email}

@@ -15,12 +15,14 @@ import odga.bt.domain.Member;
 import odga.bt.domain.Support;
 import odga.bt.domain.Touritems;
 import odga.bt.mapper.AdminMapper;
+import odga.bt.mapper.MypageMapper;
 import odga.bt.vo.Chart;
 import odga.bt.vo.GenderChart;
 @Service
 @AllArgsConstructor
 public class AdminServiceImpl implements AdminService {
 	private AdminMapper adminMapper;
+	private MypageMapper mypageMapper;
 	@Override
 	public List<Chart> areaChart() {
 		return adminMapper.areaChart();
@@ -59,12 +61,12 @@ public class AdminServiceImpl implements AdminService {
 	public Touritems bestTouritem() {
 		return adminMapper.bestTouritem();
 	}
-	//È¸¿ø¸®½ºÆ®
+	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	@Override
 	public List<Member> m_listS() {
 		return adminMapper.list();
 	}
-	//¹®ÀÇÇÏ±â¸®½ºÆ®
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ï±â¸®ï¿½ï¿½Æ®
 	@Override
 	public List<Support> notificationsS() {
 		return adminMapper.notifications(); 
@@ -82,5 +84,9 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteS(long s_id) {
 		adminMapper.delete(s_id);
 		
+	}
+	@Override
+	public void delmemS(Member mem) {
+		mypageMapper.leaveS(mem);
 	}
 }

@@ -28,7 +28,6 @@ import odga.bt.service.ReviewService;
 
 
 @Controller
-/* @RequestMapping(value = "/member/*") */
 public class MemberController {
 	@Autowired
 	private MemberService service;
@@ -43,10 +42,8 @@ public class MemberController {
 			  return "redirect:login.do";
 		  }else {
 			  member1 = service.saveStore(member, file);
-			/* String m_fname = file.getName(); */
 		      String m_ofname = file.getOriginalFilename();
 		      System.out.println("###"+member1.getM_fname()+m_ofname);
-			/* member1.setM_fname(m_fname); */
 		      member1.setM_ofname(m_ofname);		 
 		      service.joinS(member);
 		      return "redirect:login.do";
@@ -81,7 +78,6 @@ public class MemberController {
 	// 아이디 중복 체크
 	@RequestMapping(value = "checkId.jy", method = RequestMethod.POST)
 	public @ResponseBody int checkId(@RequestParam String m_email, HttpServletResponse response) throws Exception {
-		//System.out.println("★★★★★★★★★★★★★" + m_email);
 		int checkid = service.checkId(m_email, response);
 		return checkid;
 	}
@@ -101,32 +97,28 @@ public class MemberController {
 					System.out.println("★★★★★★★★★★★업데이트★★★★★★★★★★★");
 					System.out.println(member.getM_pwd());
 					if(session.getAttribute("LOGINUSER") == null) {
-						System.out.println("★★★★★★★★★★★로그인되어있네?★★★★★★★★★★★");
-						return "redirect:../login.do";
-						//return null;
+						System.out.println("★★★★★★★★★★★세션유지★★★★★★★★★★★");
+						return "redirect:login.do";
 					}
 					session.setAttribute("LOGINUSER", service.updateS(member1));
 					rttr.addFlashAttribute("msg", "회원정보 수정 완료");
 					return "redirect:member.do"; 
-					//return null;
 			}else {
 				member1.setM_pwd(m_newpwd);
 				if(session.getAttribute("LOGINUSER") == null) {
-					System.out.println("★★★★★★★★★★★로그인되어있네?★★★★★★★★★★★");
-						return "redirect:../login.do";
-						//return null;
+					System.out.println("★★★★★★★★★★★세션유지★★★★★★★★★★★");
+						return "redirect:login.do";
 				}
 				session.setAttribute("LOGINUSER", service.updateS(member1));
 				rttr.addFlashAttribute("msg", "회원정보 수정 완료");
 				return "redirect:member.do";
-				//return null;
 			}
 		}
 		// 회원 탈퇴
 		@RequestMapping(value = "leaveM", method = RequestMethod.POST)
 		private String leaveS(@ModelAttribute Member member, HttpSession session, HttpServletResponse response) {
 			if(session.getAttribute("LOGINUSER") == null) {
-				return "redirect:../login.do";
+				return "redirect:login.do";
 			}
 			System.out.println("#>leaveMember 로그인되었음");
 			System.out.println(member.getM_id());
@@ -136,9 +128,10 @@ public class MemberController {
 				session.invalidate();
 				return "index";
 			}else {			
-				return "leave";
+				return "login/leave";
 			}
 		}
+		/*
 		@ResponseBody
 	      @RequestMapping(value = "/checkLogin.jy", method = RequestMethod.POST)
 	      public String checkLogin(Member member, HttpServletResponse response) throws Exception {
@@ -147,7 +140,7 @@ public class MemberController {
 	         String returnVal = Integer.toString(checklogin);
 
 	         return returnVal;
-	      }
+	      }*/
 		
 }
 

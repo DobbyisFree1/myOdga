@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member login(Member member, HttpServletResponse response, ServletContext servletContext) throws Exception {
 		System.out.println("############로그인 서비스#############");
-		response.setContentType("text/html;charset=utf-8");
+		/* response.setContentType("text/html;charset=utf-8"); */
 		//String check = member.getM_email();
 		//log.info("##check"+check);
 		if(memberMapper.checkId(member.getM_email()) == 0) {
@@ -77,8 +77,10 @@ public class MemberServiceImpl implements MemberService {
 			Member member1 = memberMapper.loginS(member.getM_email());
 			String pwd1 = member1.getM_pwd();
 			String pwd2 = member.getM_pwd();
-			System.out.println("Service: "+ pwd1 + " ## 받아온거 : "+ pwd2);
+			//System.out.println("Service: "+ pwd1 + " ## 받아온거 : "+ pwd2);
 			if(pwd1.equals(pwd2)) {
+				System.out.println("비밀번호 일치");
+				member1.setM_pwd("");
 				return member1;
 			}else {
 				return null;

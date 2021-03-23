@@ -77,7 +77,10 @@
                                     <li><a href="https://www.agoda.com/">호텔예약</a></li>
                                     <c:if test="${LOGINUSER.m_verify eq 0}">
                                     	<li><a href="member.do">마이페이지</a></li>
-                                    </c:if>                                  
+                                    </c:if>           
+                                    <c:if test="${not empty sessionId}">
+                                    	<li><a href="member.do">마이페이지</a></li>
+                                    </c:if>                           
                                     <c:if test="${LOGINUSER.m_verify eq 9}">
                                     	<li><a href="dashboard.do">관리자페이지</a></li>
                                     </c:if>
@@ -86,9 +89,9 @@
                                     </li>
                               </ul>
                               <ul style="float: left;width: 20%;padding-top: 23px;" align="left">   
-                                 <li class="login" style="width: 75%;padding: 1%;text-align: center;float:left;">                          
+                                 <li class="login img-wrapper" style="width: 75%;padding: 1%;text-align: center;float:left;">                          
                                              <c:choose>
-                                                   <c:when test="${empty LOGINUSER}">
+                                                   <c:when test="${empty LOGINUSER and empty sessionId}">
                                                       <a href="login.do" style="padding: inherit;font-size: 80%;">
                                                          <div style="float: left;font-size: 200%;margin-top: 7px;margin-left: 45px;">
                                                             <i class="ti-user"></i>
@@ -102,7 +105,10 @@
                                                       <c:choose>
                                                          <c:when test="${LOGINUSER.m_verify eq 0}">
                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
-                                                         </c:when>                                           
+                                                         </c:when>  
+                                                         <c:when test="${sessionId != null}">
+                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>${sessionId} 님 로그아웃</a>
+                                                         </c:when>                                         
                                                          <c:otherwise>
                                                              <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>관리자님 로그아웃</a>
                                                          </c:otherwise>
@@ -111,11 +117,17 @@
                                              </c:choose>
                                           </li>
                                           <c:if test="${not empty LOGINUSER}">
-	 										<li style="float: right;width: 25%;">   
+	 										<li class="img-wrapper" style="float: right;width: 25%;">   
 	                                      	 <div class="main-menu f-right d-none d-lg-block"><img class="img-fluid" onclick="goMypage()" src="assets/img/profile/${LOGINUSER.m_fname}" alt="" style="cursor: pointer;min-height:60px;width: 60px;border-radius: 50%;max-width: 100%;border: 3px solid white;">
 			                                    </div>
 			                           		</li> 
-			                           		</c:if>                                    
+			                           		</c:if>
+			                           		<c:if test="${not empty sessionId}">
+	 										<li class="img-wrapper" style="float: right;width: 25%;">   
+	                                      	 <div class="main-menu f-right d-none d-lg-block"><img class="img-fluid" onclick="goMypage()" src="${sessionPi}" alt="" style="cursor: pointer;min-height:60px;width: 60px;border-radius: 50%;max-width: 100%;border: 3px solid white;">
+			                                    </div>
+			                           		</li> 
+			                           		</c:if>                             
                                       </ul>
 		                           </ul>
 		                        </nav>
@@ -372,7 +384,7 @@
                            <div class="row justify-content-end">
                               <div class="col-lg-12 sa sa-down best-review" data-sa-margin="700">
                                  <div class="visit-caption2" 
-                                 style="">
+                                 style="scrollbar-width:thin;scrollbar-color: #6799c5 #e4e4e4">
                                     <h3>${review.b_subject}</h3>
                                     <p>${review.b_content}</p>
                                  </div>

@@ -9344,7 +9344,7 @@ button.bg-dark:focus {
 
 a.text-primary:hover,
 a.text-primary:focus {
-  color: #0c7cd5 !important;
+  color: #f26e6d !important;
 }
 
 .text-secondary {
@@ -19683,23 +19683,23 @@ Copyright (c) 2015 Daniel Eden
 
 .dark-edition .btn.btn-primary {
   color: #fff;
-  background-color: #913f9e;
-  border-color: #913f9e;
+  background-color: #d1302e;
+  border-color: #e53f3c;
   box-shadow: 0 2px 2px 0 rgba(145, 63, 158, 0.14), 0 3px 1px -2px rgba(145, 63, 158, 0.2), 0 1px 5px 0 rgba(145, 63, 158, 0.12);
 }
 
 .dark-edition .btn.btn-primary:hover {
   color: #fff;
-  background-color: #9b43a9;
-  border-color: #692e72;
+  background-color: #e53f3c;
+  border-color: #cd2d2b;
 }
 
 .dark-edition .btn.btn-primary:focus,
 .dark-edition .btn.btn-primary.focus,
 .dark-edition .btn.btn-primary:hover {
   color: #fff;
-  background-color: #9b43a9;
-  border-color: #692e72;
+  bbackground-color: #d1302e;
+  border-color: #e53f3c;
 }
 
 .dark-edition .btn.btn-primary:active,
@@ -19707,8 +19707,8 @@ Copyright (c) 2015 Daniel Eden
 .open>.dark-edition .btn.btn-primary.dropdown-toggle,
 .show>.dark-edition .btn.btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #9b43a9;
-  border-color: #692e72;
+  background-color: #d1302e;
+  border-color: #e53f3c;
   box-shadow: 0 2px 2px 0 rgba(145, 63, 158, 0.14), 0 3px 1px -2px rgba(145, 63, 158, 0.2), 0 1px 5px 0 rgba(145, 63, 158, 0.12);
 }
 
@@ -19725,8 +19725,8 @@ Copyright (c) 2015 Daniel Eden
 .show>.dark-edition .btn.btn-primary.dropdown-toggle:focus,
 .show>.dark-edition .btn.btn-primary.dropdown-toggle.focus {
   color: #fff;
-  background-color: #9b43a9;
-  border-color: #3d1b43;
+  background-color: #d1302e;
+  border-color: #e53f3c;
 }
 
 .open>.dark-edition .btn.btn-primary.dropdown-toggle.bmd-btn-icon {
@@ -20437,7 +20437,6 @@ Copyright (c) 2015 Daniel Eden
 .dark-edition .sidebar .sidebar-background:after,
 .dark-edition .sidebar {
   background: #1f283e;
-  opacity: .94;
 }
 
 .dark-edition .sidebar[data-background-color="black"] .nav li:not(.active) a,
