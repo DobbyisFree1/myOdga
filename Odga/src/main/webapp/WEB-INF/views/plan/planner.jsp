@@ -129,11 +129,11 @@
                                                    <c:otherwise>
                                                       <c:choose>
                                                          <c:when test="${LOGINUSER.m_verify eq 0}">
-                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
+                                                            <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>${LOGINUSER.m_name}님 로그아웃</a>                                                             										          
                                                           <!--   <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="member.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 마이페이지</a></li> -->
                                                          </c:when>                                           
                                                          <c:otherwise>
-                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;"><i class="ti-user"></i>관리자님 로그아웃</a>
+                                                             <a onclick="logout()" style="padding: inherit;font-size: 100%; margin-top: 7%;cursor:pointer;"><i class="ti-user"></i>관리자님 로그아웃</a>
                                                            <!--  <li style="width: 100%;padding: 0%;float: left;text-align: center;"><a href="dashboard.do" style="padding: inherit;font-size: 80%;"><i class="ti-user"></i> 관리자페이지</a></li> -->
                                                          </c:otherwise>
                                                        </c:choose>
@@ -302,7 +302,7 @@
 							<div class="category-listing mb-50">
 								<div class="single-listing">									
 									<div class="select-job-items2">
-										<div class="card" id="card2" style="min-height: 460px;">
+										<div class="card" name="card2"id="card2" style="min-height: 460px;">
 											
 										</div>
 									</div>
@@ -410,12 +410,13 @@
 			                                 </c:when>
 			                                 <c:otherwise>
 			                                    <li><a href="logout.do">로그아웃</a></li>
+			                                    <li><a onclick="goMypage()" style="cursor:pointer;">마이페이지</a></li>
 			                                 </c:otherwise>
 			                            </c:choose>
 										<li><a href="listing.do">국내여행지</a></li>
 										<li><a href="use.do">이용방법</a>
-										<li><a href="review.do">여행후기</a></li>
-										<li><a onclick="goSupport()" style ="cursor: pointer;">문의하기</a></li>
+										<li><a onclick="goPlanner()" style="cursor:pointer;">나의 여행 만들기</a></li>
+										<li><a onclick="goSupport()" style="cursor:pointer;">문의하기</a></li>
 									</ul>
 								</div>
 							</div>
@@ -502,10 +503,6 @@
                      data: { searchOption: searchOption, keyword : keyword, areacode : areaindex, 
                            sigungucode: sigunguIndex },
                      success: function(responseData){
-                      /*  if(!responseData){
-                          alert("검색 결과가 없습니다.");
-                          return false;
-                       } */
                        var html = "";
                      var html1 = "";
                      var list = responseData.lists;
@@ -534,7 +531,6 @@
        	              }       
        	           }
        	                $("#result").html(html1);
-       	           /* $("#card").html(html); */
        	             $("#data-panel").html(html);
                      }
                   });
@@ -548,11 +544,19 @@
 <script type="text/javascript">
 function savePlanner(){
 	checkUnload = false;
-	
-	var p_title = $("#p_title").val(); 
+	var sp = document.getElementById('card2').innerText;
+	var p_title = $("#p_title").val();
+	if(p_title == null || p_title==""){
+		sweetAlert("여행 플래너의 제목을 입력해주세요.");
+		$("#p_title").focus();
+		return false;
+	}
+	else if(sp==null||sp=="장소를 추가해주세요"||sp==""){
+		sweetAlert("여행 플래너에 장소를 추가해주세요.");
+		return false;
+	}else{
 	var p_msize = $("#test1 option:selected").val();
 	var p_concept = $("#test2 option:selected").val();
-	
 	var title = $("#title").val(); 
 	var hsize = $("#hSize").val();
 	var concept = $("#concept").val();
@@ -572,6 +576,7 @@ function savePlanner(){
 				document.fin.submit();
 			}
 		});
+	}
 }
 </script>
 
@@ -647,7 +652,7 @@ function daydo(value){
            if(responseData.length != 0){
         	   for(var i=0; i<responseData.length; i++){
 					  if((responseData[i].firstimage)!= null){ html += "<tbody class='list-tbody'><tr><td style='width: 30%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='"+responseData[i].firstimage+"'/>";	
-				  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='https://st4.depositphotos.com/17828278/24401/v/600/depositphotos_244011872-stock-illustration-image-vector-symbol-missing-available.jpg'/>";}
+				  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='resources/upload/insteadimg.png'/>";}
 					  if((responseData[i].title)!= null){ html += ""+responseData[i].title+"</td></tr>";
 				  		 }else{ html += "장소명이 없습니다.</td></tr>";}
 					  if((responseData[i].addr1)!= null){ html += "<tr style='width: 100%;'><td class='td-list' style='font-size: x-small;'>"+responseData[i].addr1+"</td></tr>";	
@@ -971,7 +976,7 @@ function checkNull(){
 	            if(responseData.length != 0){
 	            	for(var i=0; i<responseData.length; i++){
 						  if((responseData[i].firstimage)!= null){ html += "<tbody class='list-tbody'><tr><td style='width: 30%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='"+responseData[i].firstimage+"'/>";	
-					  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='https://st4.depositphotos.com/17828278/24401/v/600/depositphotos_244011872-stock-illustration-image-vector-symbol-missing-available.jpg'/>";}
+					  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='resources/upload/insteadimg.png'/>";}
 						  if((responseData[i].title)!= null){ html += ""+responseData[i].title+"</td></tr>";
 					  		 }else{ html += "장소명이 없습니다.</td></tr>";}
 						  if((responseData[i].addr1)!= null){ html += "<tr style='width: 100%;'><td class='td-list' style='font-size: x-small;'>"+responseData[i].addr1+"</td></tr>";	
@@ -1003,7 +1008,7 @@ function checkNull(){
 	            if(responseData.length != 0){
 	            	for(var i=0; i<responseData.length; i++){
 						  if((responseData[i].firstimage)!= null){ html += "<tbody class='list-tbody'><tr><td style='width: 30%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='"+responseData[i].firstimage+"'/>";	
-					  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='https://st4.depositphotos.com/17828278/24401/v/600/depositphotos_244011872-stock-illustration-image-vector-symbol-missing-available.jpg'/>";}
+					  		 }else{ html += "<tbody style='border-bottom: 1px solid #999;'><tr><td  style='width: 40%;padding-top: 5%;font-size: smaller;'><img class='pic list-pic' src='resources/upload/insteadimg.png'/>";}
 						  if((responseData[i].title)!= null){ html += ""+responseData[i].title+"</td></tr>";
 					  		 }else{ html += "장소명이 없습니다.</td></tr>";}
 						  if((responseData[i].addr1)!= null){ html += "<tr style='width: 100%;'><td class='td-list' style='font-size: x-small;'>"+responseData[i].addr1+"</td></tr>";	
@@ -1024,6 +1029,8 @@ function checkNull(){
 <script type="text/javascript">
 //초기화버튼
 function reset(){
+	sdate=null;
+	edate=null;
 	document.getElementById("p_title").value = null;
 	document.getElementById("sdate").value = null;
 	document.getElementById("edate").value = null;
@@ -1035,6 +1042,8 @@ function reset(){
 	$('#card2').empty(); 
 	$('#card').empty();
 	dayDelete();
+	dayReset();
+	dayDelAll();
 }
 </script>
 

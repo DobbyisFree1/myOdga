@@ -308,52 +308,54 @@
 						</div>
 					</div>
 				</div>
-				<div class="row justify-content-between">
-					<div class="col-lg-3 col-md-6">
-						<div class="single-services text-center mb-50">
-							<div class="services-icon">
-								<span class="flaticon-list"></span>
-							</div>
-							<div class="services-cap">
-								<h5>
-									<a href="#">5분이면 나의 여행이 한눈에!</a>
-								</h5>
-								<p>지도위에서 쉽게 계획하기</p>
-							</div>
-							<!-- Shpape -->
-							<img class="shape1 d-none d-lg-block"
-								src="assets/img/icon/serices1.png" alt="">
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6">
-						<div class="single-services text-center mb-50">
-							<div class="services-icon">
-								<span class="flaticon-problem"></span>
-							</div>
-							<div class="services-cap">
-								<h5>
-									<a href="#">여행일정 최적화</a>
-								</h5>
-								<p>동선을 확인한 후 클릭만으로 일정 최적화</p>
-							</div>
-							<img class="shape2 d-none d-lg-block"
-								src="assets/img/icon/serices2.png" alt="">
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6">
-						<div class="single-services text-center mb-50">
-							<div class="services-icon">
-								<span class="flaticon-respect"></span>
-							</div>
-							<div class="services-cap">
-								<h5>
-									<a href="#">여행지에서도 모바일로 편리하게!</a>
-								</h5>
-								<p>여행일정 확인과 길찾기 연동</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				    <div class="row justify-content-between">
+		               <div class="col-lg-3 col-md-6">
+		                  <div class="single-services text-center mb-50">
+		                     <div class="services-icon">
+		                        <span class="flaticon-list"></span>
+		                     </div>
+		                     <div class="services-cap">
+		                        <h5>
+		                           <a href="#">24,007개 여행지를 한 눈에!</a>
+		                        </h5>
+		                        <p>여행지를 편리하게 검색해보세요.</p>
+		                     </div>
+		                     <!-- Shpape -->
+		                     <img class="shape1 d-none d-lg-block"
+		                        src="assets/img/icon/serices1.png" alt="">
+		                  </div>
+		               </div>
+		               <div class="col-lg-3 col-md-6">
+		                  <div class="single-services text-center mb-50">
+		                     <div class="services-icon">
+		                        <span class="flaticon-problem"></span>
+		                     </div>
+		                     <div class="services-cap">
+		                        <h5>
+		                           <a href="#">여행일정 최적화!</a>
+		                        </h5>
+		                        <p>동선을 확인한 후 클릭만으로 일정 최적화해보세요.</p>
+		                     </div>
+		                     <img class="shape2 d-none d-lg-block"
+		                        src="assets/img/icon/serices2.png" alt="">
+		                  </div>
+		               </div>
+		               <div class="col-lg-3 col-md-6">
+		                  <div class="single-services text-center mb-50">
+		                     <div class="services-icon">
+		                        <span class="flaticon-respect"></span>
+		                     </div>
+		                     <div class="services-cap">
+		                        <h5>
+		                           <a href="#">마이페이지에서 여행일정관리!</a>
+		                        </h5>
+		                        <p>자신만의 플래너를 관리하세요.</p> 
+		                     </div>
+		                  </div>
+		               </div>
+		            </div>
+		         </div>
+		      </div>
 			</div>
 		</div>
 		<!-- Services Area End -->
@@ -384,7 +386,7 @@
                            <div class="row justify-content-end">
                               <div class="col-lg-12 sa sa-down best-review" data-sa-margin="700">
                                  <div class="visit-caption2" 
-                                 style="scrollbar-width:thin;scrollbar-color: #6799c5 #e4e4e4">
+                                 style="scrollbar-width:thin;scrollbar-color: #6799c5 #e4e4e4;text-align: center;">
                                     <h3>${review.b_subject}</h3>
                                     <p>${review.b_content}</p>
                                  </div>

@@ -107,7 +107,7 @@
                     $("#email").css("background-color", "#FFCECE");
                     idCheck = 0;
                 } else if (data == '0') {
-                    $("#email").css("background-color", "#B0F6AC");
+                	$("#email").css("background-color", "#B0F6AC").css("color","black");
                     idCheck = 1;
                     if(idCheck==1 && pwdCheck == 1) {
                         $(".submit").prop("disabled", false);
@@ -146,7 +146,7 @@
             $("#m_pwdcheck").css("background-color", "#FFCECE");
         }
         else if (inputed == reinputed) {
-            $("#m_pwdcheck").css("background-color", "#B0F6AC");
+        	$("#m_pwdcheck").css("background-color", "#B0F6AC").css("color","black");
             pwdCheck = 1;
             if(idCheck==1 && pwdCheck == 1) {
                 $(".submit").prop("disabled", false);
@@ -360,30 +360,39 @@ $(document).ready(function() {
 		    l.m_email.focus();
 		    return false;
 		}
-		/* $.ajax({                             // ajax 함수를 실행하는 선언문입니다. jquery에서 가져와
-			type : "POST",                   // method 구분입니다. 파라미터는 GET, POST 문자열 구문으로 작성합니다.
-            url : "/checkLogin.jy",          // url을 입력합니다. 예를들어, requestMapping=login.do 컨트롤러 연동이 필요할경우 login.do 를 문자열로 작성 
-            data : {               			// 모델앤뷰 객체에 담길 data 파라미터입니다. VO 로 담겨서 컨트롤러로 이동된다고 생각하세요
-                m_email : $("#l_email").val()
-               ,m_pwd   : $("#l_pwd").val()
-            },
-            success : function(data) {       // ajax가 성공할 경우 해당 구문으로 진입합니다.
-            	// 로그인 성공
-            	
-            	if ( data == "1" ){
-            		l.submit();
-            	} else {
-            		salert("이메일 또는 비밀번호를 다시 확인해주세요.");
-            		return;
-            	}
-            },
-            error : function(error) {        // ajax가 오류날 경우 해당 구문으로 진입합니다.
-            	
-            	// 이제 checkLogin.jy 에서 아이디, 비밀번호 검증하고 true false 리턴줘서 처리하면됨
-            	salert("서비스에러발생");
-
-            }
-        }); */
+		var uemail = $("#l_email").val();
+		var pwd = $("#l_pwd").val();
+		
+		//alert(uemail +"##"+ pwd);
+		//RSA 암호화 생성
+		var rsa = new RSAKey();
+		rsa.setPublic($("#RSAModulus").val(), $("#RSAExponent").val());
+		
+		//사용자 계정정보를 암호화 처리
+		uemail = rsa.encrypt(uemail);
+		pwd = rsa.encrypt(pwd); 
+		//alert(uemail +"##"+ pwd);
+		$.ajax({ 
+			  type: "POST",  
+			  url: "login.proc",  
+			  data: {m_email :uemail, m_pwd: pwd},  //사용자 암호화된 계정정보를 서버로 전송
+			  dataType:"json",
+			  success: function(msg){    
+				 
+				  if(msg.state == "true")
+				  {
+					  location.href = "../"; 
+				  }
+				  else if(msg.state == "false")
+				  {
+					 salert("이메일 또는 비밀번호를 다시 확인해주세요.");
+				  }
+				  else
+				  {
+					 salert("잘못된 경로로 접근하였습니다. 암호화 인증에 실패하였습니다."); 
+				  } 
+			  } 
+		});
 	 }
 	 
 </script>
@@ -393,18 +402,18 @@ $(document).ready(function() {
     $("#l_email").keydown(function(key) {
         //키의 코드가 13번일 경우 (13번은 엔터키)
         if (key.keyCode == 13) {
-        	loginCheck()
+           $("#ms_login").click();
         }
     });
     $("#l_pwd").keydown(function(key) {
         //키의 코드가 13번일 경우 (13번은 엔터키)
         if (key.keyCode == 13) {
-        	loginCheck()
+           $("#ms_login").click();
         }
     });
 });
 </script>
-<script>
+<!-- <script>
 $("#ms_login").click(function(){
 	//사용자 계정정보 암호화전 평문
 	var uemail = $("#l_email").val();
@@ -441,7 +450,7 @@ $("#ms_login").click(function(){
 		  } 
 	});
 });
-</script>
+</script> -->
 </html>	 
 
 <!-- jQuery-->

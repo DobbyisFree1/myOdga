@@ -335,17 +335,37 @@
             </c:otherwise>
             </c:choose>
                         
-                        <!-- 다음 페이지 START -->
-                        <c:choose>
- 						<c:when test="${keyword!=null}">
-	                        <li class="page-item"><a class="page-link" href="listing.do?cp=${listResult.nextPage}&keyword=${keyword}&catgo=${catgo}">
-	                        <span class="ti-angle-right"></span></a></li>
-                        </c:when>
-                        <c:otherwise>
-	                         <li class="page-item"><a class="page-link" href="listing.do?cp=${listResult.nextPage}">
-	                         <span class="ti-angle-right"></span></a></li>
-                        </c:otherwise>
-                        </c:choose>
+                          <!-- 다음 페이지 START -->
+	                        <c:choose>
+		                      <c:when test="${keyword!=null}">
+		                         <c:choose>
+		                            <c:when test="${listResult.cp eq listResult.endPage}">
+		                                 <li class="page-item disabled">
+		                                 <a class="page-link" href="listing.do?cp=${listResult.nextPage}&keyword=${keyword}&catgo=${catgo}">
+		                                 <span class="ti-angle-right"></span></a></li>
+		                                 </c:when>
+		                                <c:otherwise>
+		                                  <li class="page-item">
+		                                  <a class="page-link" href="listing.do?cp=${listResult.nextPage}&keyword=${keyword}&catgo=${catgo}">
+		                                  <span class="ti-angle-right"></span></a></li>
+		                                </c:otherwise>
+		                         </c:choose>
+		                      </c:when>
+			                  <c:otherwise>
+		                         <c:choose>
+		                            <c:when test="${listResult.cp eq listResult.endPage}">
+		                                 <li class="page-item disabled">
+		                                 <a class="page-link" href="listing.do?cp=${listResult.nextPage}">
+		                                 <span class="ti-angle-right"></span></a></li>
+		                            </c:when>
+		                         	<c:otherwise>
+		                                <li class="page-item">
+		                                <a class="page-link" href="listing.do?cp=${listResult.nextPage}">
+		                                  <span class="ti-angle-right"></span></a></li>
+		                            </c:otherwise>
+		                         </c:choose>
+			                 </c:otherwise>
+		                   </c:choose>
                          <!-- 다음 페이지 END -->
                         
                         </ul>

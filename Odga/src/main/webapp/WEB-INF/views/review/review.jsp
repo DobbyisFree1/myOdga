@@ -382,59 +382,67 @@
                                   </c:choose>
                                     <!-- 이전 페이지 END -->       
                                            
-                                  <c:choose>
-                                     <c:when test="${reviewSearch.keyword != null}">
-                                              <c:forEach begin="${reviewlistResult.cp}" end="${reviewlistResult.ps}" var="i">
-                                                 <li class="page-item active" style="display:none"><a class="page-link" style="display:none" href="review.do?cp=${i}&keyword=${keyword}&searchOption=${searchOption}">
-                                                  <c:choose>
-                                              <c:when test="${i==reviewlistResult.cp}">
-                                                 <span style="color:red;font-weight:bold; display:none">${i}</span>
-                                              </c:when>
-                                              <c:otherwise>
-                                                  ${i}
-                                              </c:otherwise>
-                                          </c:choose>            
-                                                </a>
-                                                </li>
-                                              </c:forEach>
-                                        </c:when>
-                                    <c:otherwise>
-                                              <c:forEach begin="${reviewlistResult.startPage}" end="${reviewlistResult.endPage}" var="i">
-                                                 <li class="page-item active"><a class="page-link" href="review.do?cp=${i}">
-                                                  <c:choose>
-                                              <c:when test="${i==reviewlistResult.cp}">
-                                                 <span style="color:red;font-weight:bold">${i}</span>
-                                              </c:when>
-                                              <c:otherwise>
-                                                  ${i}
-                                              </c:otherwise>
-                                          </c:choose>            
-                                                </a>
-                                                </li>
-                                              </c:forEach>
-                                     </c:otherwise>
+                                     <c:choose>
+	                                     <c:when test="${reviewSearch.keyword != null}">
+	                                              <c:forEach begin="${reviewlistResult.startPage}" end="${reviewlistResult.endPage}" var="i">
+	                                                 <li class="page-item active" style="display:none"><a class="page-link" style="display:none" href="review.do?cp=${i}&keyword=${keyword}&searchOption=${searchOption}">
+	                                                  <c:choose>
+	                                              <c:when test="${i==reviewlistResult.cp}">
+	                                                 <span style="color:red;font-weight:bold; display:none">${i}</span>
+	                                              </c:when>
+	                                              <c:otherwise>
+	                                                  ${i}
+	                                              </c:otherwise>
+	                                          </c:choose>            
+	                                                </a>
+	                                                </li>
+	                                              </c:forEach>
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                              <c:forEach begin="${reviewlistResult.startPage}" end="${reviewlistResult.endPage}" var="i">
+	                                                 <li class="page-item active"><a class="page-link" href="review.do?cp=${i}">
+	                                                  <c:choose>
+	                                              <c:when test="${i==reviewlistResult.cp}">
+	                                                 <span style="color:red;font-weight:bold">${i}</span>
+	                                              </c:when>
+	                                              <c:otherwise>
+	                                                  ${i}
+	                                              </c:otherwise>
+	                                          </c:choose>            
+	                                                </a>
+	                                                </li>
+	                                              </c:forEach>
+	                                     </c:otherwise>
                                      </c:choose>
                                              
-                                             <!-- 다음 페이지 START -->
-                                   <c:choose>
-                                           <c:when test="${reviewSearch.keyword != null}">
-                                                   <li class="page-item" style="display:none" ><a class="page-link" style="display:none" href="review.do?cp=${reviewlistResult.nextPage}&keyword=${keyword}&catgo=${catgo}">
-                                                   <span class="ti-angle-right" style="display:none"></span></a></li>
-                                                </c:when>
-                                             <c:otherwise>
-                                                 <c:choose>
-                                                    <c:when test="${reviewlistResult.cp eq reviewlistResult.endPage}">
-                                                    <li class="page-item disabled"><a class="page-link" href="review.do?cp=${reviewlistResult.nextPage}">
-                                                    <span class="ti-angle-right"></span></a></li>
-                                                    </c:when>
-                                                 <c:otherwise>
-                                                    <li class="page-item"><a class="page-link" href="review.do?cp=${reviewlistResult.nextPage}">
-                                                    <span class="ti-angle-right"></span></a></li>
-                                                 </c:otherwise>
-                                                 </c:choose>
-                                             </c:otherwise>
-                                             </c:choose>
-                                  <!-- 다음 페이지 END --> 
+                                                    <!-- 다음 페이지 START -->
+							         <c:choose>
+							               <c:when test="${reviewSearch.keyword != null}">
+							                  <c:choose>
+							                     <c:when test="${reviewlistResult.cp eq reviewlistResult.endPage}">
+							                      <li class="page-item disabled" style="display:none" ><a class="page-link" style="display:none" href="review.do?cp=${reviewlistResult.nextPage}&keyword=${keyword}&catgo=${catgo}">
+							                      <span class="ti-angle-right" style="display:none"></span></a></li>
+							                      </c:when>
+							                   <c:otherwise>
+							                     <li class="page-item"><a class="page-link" href="review.do?cp=${reviewlistResult.nextPage}">
+							                     <span class="ti-angle-right"></span></a></li>
+							                   </c:otherwise>
+							                  </c:choose>
+							                </c:when>
+									        <c:otherwise>
+									              <c:choose>
+									                    <c:when test="${reviewlistResult.cp eq reviewlistResult.endPage}">
+									                   <li class="page-item disabled"><a class="page-link" href="review.do?cp=${reviewlistResult.nextPage}">
+									                   <span class="ti-angle-right"></span></a></li>
+									                   </c:when>
+									              <c:otherwise>
+									                   <li class="page-item"><a class="page-link" href="review.do?cp=${reviewlistResult.nextPage}">
+									                   <span class="ti-angle-right"></span></a></li>
+									                   </c:otherwise>
+									                   </c:choose>
+									        </c:otherwise>
+							       </c:choose>
+							        <!-- 다음 페이지 END -->  
                                              </ul>
                                          </nav>
                                      </div>

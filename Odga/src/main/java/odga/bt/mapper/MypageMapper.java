@@ -25,7 +25,9 @@ public interface MypageMapper {
 	public Planner thisplanner(long p_id);
 	public ArrayList<S_Planner> planDetail(long p_id);
 	public Touritems detailItem (String contentid);
-	
+	List<Touritems> plannerImg(long m_id);
+	public void nullPlanDel(long m_id);
+
 	//나의 후기
 	List<Review> selectByReview(long m_id);
 	void deleteByB_id(long b_id);

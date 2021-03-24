@@ -1,7 +1,9 @@
 package odga.bt.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,7 @@ import odga.bt.mapper.MemberMapper;
 import odga.bt.mapper.MypageMapper;
 import odga.bt.mapper.PlannerMapper;
 import odga.bt.vo.DetailVo;
+import odga.bt.vo.MyPlanner;
 import odga.bt.vo.TotalList;
 
 @Service
@@ -69,14 +72,23 @@ public class MypageServiceImpl implements MypageService {
 	}
 	//나의 플래너 일정
     @Override
-    public List<Planner> myPlanS(long m_id){
-    	List<Planner> myPlan = mypageMapper.myPlanner(m_id);
-    	if(myPlan!=null) return myPlan;
-    	else {
-    		System.out.println("등록된 나의 플랜이 없습니다.");
-    		return null;
+    public MyPlanner myPlanS(long m_id){    	
+    	MyPlanner myPlanner =new MyPlanner();
+    	List<Touritems> p_img = mypageMapper.plannerImg(m_id);
+    	List<Planner> planner = mypageMapper.myPlanner(m_id);
+    	myPlanner.setP_img(p_img);
+    	myPlanner.setPlanner(planner);
+    	if(myPlanner.equals(null)) return null;
+    	else {    		
+    		return myPlanner;
     	} 		
     }
+    
+    @Override
+	public void nullPlanDel(long m_id) {
+		mypageMapper.nullPlanDel(m_id);
+	}
+    
     @Override
     public DetailVo planDetails(long m_id, long p_id){
     	Planner plan = mypageMapper.thisplanner(p_id);
@@ -92,7 +104,8 @@ public class MypageServiceImpl implements MypageService {
     		return null;
     	} 
     		
-    }
+    }  
+    
     @Override
 	public List<Review> selectByReviewS(long m_id) {
 		return mypageMapper.selectByReview(m_id);
@@ -129,4 +142,6 @@ public class MypageServiceImpl implements MypageService {
 	public List<Support> m_notificationsS(long m_id) {
 		return mypageMapper.m_notifications(m_id);
 	}
+	
+	
 }

@@ -1,6 +1,7 @@
 package odga.bt.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ import odga.bt.service.PlannerService;
 import odga.bt.service.ReviewService;
 import odga.bt.service.TouritemsService;
 import odga.bt.vo.DetailVo;
+import odga.bt.vo.MyPlanner;
 import odga.bt.vo.TotalList;
 
 @Controller
@@ -59,18 +61,16 @@ public class MypageController {
 	   }
 	   @RequestMapping("/member_plan.do")
 	   public ModelAndView member_plan(long m_id) {
-		   System.out.println("###"+m_id);
-		   List<Planner> myPlans = service.myPlanS(m_id);
-
-		   int min=1, max=15;
-		   for(Planner plan : myPlans) {		   
-			   int ranNum =(int)(Math.random() * (max - min + 1) + min);
-			   String li = ranNum+".jpg";
-			   plan.setRandomImg(li);
+		   ModelAndView mv = new ModelAndView();
+		   service.nullPlanDel(m_id);
+		   MyPlanner myPlans = service.myPlanS(m_id);
+		   if(myPlans!=null) {
+			   mv = new ModelAndView("mypage/myPlan", "myPlans", myPlans);
+			   return mv;
 		   }
-		   if(myPlans!=null) return new ModelAndView("mypage/myPlan", "myPlans", myPlans);
 		   else {
-			   return new ModelAndView("mypage/myPlan"); 
+			   mv = new ModelAndView("mypage/myPlan");
+			   return mv;
 		   }
 	   }
 	   @RequestMapping("/plan_detail.do")

@@ -40,13 +40,16 @@
    background-color: #ff5235;
 }
 .swal-button--취소:not([disabled]):hover {
-    background-color: #ff5235;
+   background-color: #ff5235;
+   color:#555;
 }
 .swal-button--취소{
-   background-color: #ff3d1c;
+	color:#555;
+   background-color: #ff3d1c;  
 }
 .swal-button--취소:hover{
    background-color: #ff5235;
+   color: #fff;
 }
 .swal-button--홈으로 {
  color:#555;
@@ -127,7 +130,7 @@
         </ul>
       </div>
     </div>
-      <div class="box" >
+      <div class="box" style="background-image: linear-gradient(-80deg, #484855 0%, #2d334a 100%);">
       <c:set value="${planDetail.planer}" var="planer" />
 	  <c:set value="${planDetail.s_planer}" var="s_planer" />
 	  <c:set value="${planDetail.touritems}" var="touritems" />

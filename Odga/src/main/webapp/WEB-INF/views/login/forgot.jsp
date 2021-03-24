@@ -10,7 +10,7 @@
 .swal-button{
    background-color: #ff3d1c;
 }
-.swal-button: not([disabled]):hover {
+.swal-button:not([disabled]):hover {
    background-color: #ff5235;
 }
 .swal-button:hover{
@@ -112,7 +112,7 @@ function ssalert(text){
                     $("#email").css("background-color", "#FFCECE");
                     idCheck = 0;
                 } else if (data == '1') {
-                    $("#email").css("background-color", "#B0F6AC");
+                    $("#email").css("background-color", "#B0F6AC").css("color","black");
                     idCheck = 1;
                     if(idCheck==1 && pwdCheck == 1) {
                         $(".submit").prop("disabled", false);
@@ -121,7 +121,7 @@ function ssalert(text){
                 } else if (data == '0') {
                     $(".submit").prop("disabled", true);
                     $(".submit").css("background-color", "#aaaaaa");
-                    $("#email").css("background-color", "#FFCECE");
+                    $("#email").css("background-color", "#FFCECE").css("color","black");
                     idCheck = 0;
                 } 
                
@@ -147,10 +147,10 @@ function ssalert(text){
         if(reinputed=="" && (inputed != reinputed || inputed == reinputed)){
             $(".submit").prop("disabled", true);
             $(".submit").css("background-color", "#aaaaaa");
-            $("#m_pwdcheck").css("background-color", "#FFCECE");
+            $("#m_pwdcheck").css("background-color", "#FFCECE").css("color","black");
         }
         else if (inputed == reinputed) {
-            $("#m_pwdcheck").css("background-color", "#B0F6AC");
+            $("#m_pwdcheck").css("background-color", "#B0F6AC").css("color","black");
             pwdCheck = 1;
             if(idCheck==1 && pwdCheck == 1) {
                 $(".submit").prop("disabled", false);
@@ -161,7 +161,7 @@ function ssalert(text){
             pwdCheck = 0;
             $(".submit").prop("disabled", true);
             $(".submit").css("background-color", "#aaaaaa");
-            $("#m_pwdcheck").css("background-color", "#FFCECE");
+            $("#m_pwdcheck").css("background-color", "#FFCECE").css("color","black");
        }
     }
    
@@ -222,7 +222,7 @@ function ssalert(text){
             url : "/findPwd",
             success : function(data) {
                if(data=="1"){
-                  ssalert("비밀번호가 변경되었습니다.");
+                   ssalert("비밀번호가 변경되었습니다.");
                }else{
                   salert("비밀번호 변경 실패입니다.");
                }
@@ -268,10 +268,12 @@ function ssalert(text){
       </label>
      
       
-      <div id="email_auth_chk" style="display:none" >
-        <input type="text" name="m_email_AuthKey" id="email_AuthKey" />
-        <input type='button' value='인증하기' onclick="emailAuth_key()" />
-      </div> 
+      <label>
+         <div id="email_auth_chk" style="display:none">
+           <input type="text" name="m_email_AuthKey" id="email_AuthKey" />
+           <h2><input type='button' value='인증하기' onclick="emailAuth_key()" /></h2>
+         </div> 
+      </label> 
       
       <div id="newPwd" style="display:none" >
         <label>
